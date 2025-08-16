@@ -1,15 +1,33 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>org.jetbrains.plugins.template</id>
-    <name>IntelliJ Platform Plugin Template</name>
+    <name>AI Plugin By gtosss</name>
     <vendor>JetBrains</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>JavaScript</depends>
 
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow factoryClass="org.jetbrains.plugins.template.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
         <postStartupActivity implementation="org.jetbrains.plugins.template.startup.MyProjectActivity" />
+
+        <toolWindow id="Open Files"
+                    secondary="true"
+                    anchor="right"
+                    factoryClass="com.example.openfilesviewer.OpenFilesToolWindowFactory"/>
+
+        <applicationService serviceImplementation="com.example.openfilesviewer.OpenFilesService"/>
     </extensions>
+
+    <actions>
+        <action id="RefreshOpenFiles"
+                class="com.example.openfilesviewer.RefreshOpenFilesAction"
+                text="Refresh Open Files"
+                description="Refresh the list of open files">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </action>
+    </actions>
+
 </idea-plugin>
